@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -34,3 +34,8 @@ class QualityCheck(models.Model):
 
     def __str__(self):
         return f"Quality Check for {self.vehicle}"
+
+class CheckOut(models.Model):
+    vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
+    initiated_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    initiated_at = models.DateTimeField(auto_now_add=True)
