@@ -13,17 +13,21 @@ from .serializer import VendorSerializer, ProductSerializer, VehicleSerializer, 
 
 class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
+    permission_classes = [IsAuthenticated,]
     serializer_class = VendorSerializer
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
+    permission_classes = [IsAuthenticated,]
     serializer_class = ProductSerializer
 
 class VehicleViewSet(viewsets.ModelViewSet):
     queryset = Vehicle.objects.all()
+    permission_classes = [IsAuthenticated,]
     serializer_class = VehicleSerializer
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def vehicle_detail(request, vehicle_id):
     vehicle = Vehicle.objects.get(pk=vehicle_id)
     serializer = VehicleSerializer(vehicle)
